@@ -32,9 +32,9 @@ export default function CorporateDecorPage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch("/api/gallery/corporate-decor");
-        const data = await res.json();
-        const imgs: string[] = Array.isArray(data.images) ? data.images : [];
+        const res = await fetch("/gallery-manifest.json");
+        const manifest = await res.json();
+        const imgs: string[] = manifest['corporate-decor'] || [];
         if (imgs.length > 0) {
           setGallery(imgs.map((src, idx) => ({ src, alt: `Gallery image ${idx + 1}` })));
         } else {
